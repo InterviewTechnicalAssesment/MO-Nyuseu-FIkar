@@ -1,0 +1,6 @@
+framework module Pods_nyuseu {
+  umbrella header "Pods-nyuseu-umbrella.h"
+
+  export *
+  module * { export * }
+}
