@@ -6,6 +6,8 @@ target 'nyuseu' do
   use_frameworks!
 
   # Pods for nyuseu
+  pod 'Alamofire'
+  pod 'SDWebImage'
 
   target 'nyuseuTests' do
     inherit! :search_paths
