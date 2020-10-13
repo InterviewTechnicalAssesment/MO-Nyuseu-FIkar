@@ -104,7 +104,7 @@ extension ArticleViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = ArticleCollectionView.dequeueReusableCell(withReuseIdentifier: "ArticleCell", for: indexPath) as! ArticleCollectionViewCell
         if let imageArticle = articleArrayList[indexPath.row].urlToImage {
-            cell.articleImage.sd_setImage(with: URL(string: imageArticle))
+            cell.articleImage.sd_setImage(with: URL(string: imageArticle), placeholderImage: UIImage(systemName: "xmark.icloud"))
         }
         else {
             cell.articleImage.image = UIImage(systemName: "xmark.icloud")
