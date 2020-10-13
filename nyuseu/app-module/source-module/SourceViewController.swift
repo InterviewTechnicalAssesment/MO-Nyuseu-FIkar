@@ -27,9 +27,11 @@ class SourceViewController: UIViewController {
     
     func setupNavigationBar() {
         searchController.searchBar.delegate = self
-        navigationItem.title = "Source News - \(category.capitalized)"
+        navigationItem.title = "Source - \(category.capitalized)"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.preservesSuperviewLayoutMargins = true
     }
     
     func setupTableView() {
