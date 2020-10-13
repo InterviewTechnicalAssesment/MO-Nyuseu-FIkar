@@ -39,6 +39,7 @@
 		2992736C2534D72800E41D63 /* WebviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992736B2534D72800E41D63 /* WebviewPresenter.swift */; };
 		299273712534D77400E41D63 /* WebviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299273702534D77400E41D63 /* WebviewInteractor.swift */; };
 		299273762534D79100E41D63 /* WebviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299273752534D79100E41D63 /* WebviewRouter.swift */; };
+		2992737E25358D3200E41D63 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992737D25358D3200E41D63 /* CategoryModel.swift */; };
 		5FE72B4B3CDBB7C0635ABE09 /* Pods_nyuseuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8455AE3274F36625E4019637 /* Pods_nyuseuTests.framework */; };
 		7C54D3D39D56FA1AAAE472F5 /* Pods_nyuseu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF6121CCEDEEF361646C65F2 /* Pods_nyuseu.framework */; };
 		D490E4A67C6B630D08A7D830 /* Pods_nyuseu_nyuseuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D093C30CBB36AB319825CAF /* Pods_nyuseu_nyuseuUITests.framework */; };
@@ -103,6 +104,7 @@
 		2992736B2534D72800E41D63 /* WebviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewPresenter.swift; sourceTree = "<group>"; };
 		299273702534D77400E41D63 /* WebviewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewInteractor.swift; sourceTree = "<group>"; };
 		299273752534D79100E41D63 /* WebviewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewRouter.swift; sourceTree = "<group>"; };
+		2992737D25358D3200E41D63 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		2C1D1E06796EB97472E5B9BC /* Pods-nyuseu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nyuseu.release.xcconfig"; path = "Target Support Files/Pods-nyuseu/Pods-nyuseu.release.xcconfig"; sourceTree = "<group>"; };
 		2D6FACF2307847BAC9A68512 /* Pods-nyuseu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nyuseu.debug.xcconfig"; path = "Target Support Files/Pods-nyuseu/Pods-nyuseu.debug.xcconfig"; sourceTree = "<group>"; };
 		5D093C30CBB36AB319825CAF /* Pods_nyuseu_nyuseuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nyuseu_nyuseuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +227,7 @@
 				294D81EB25343970003083A1 /* nyuseu.xcdatamodeld */,
 				2992730D2534905200E41D63 /* SourceModel.swift */,
 				299273202534A18200E41D63 /* ArticleModel.swift */,
+				2992737D25358D3200E41D63 /* CategoryModel.swift */,
 			);
 			path = "app-entity";
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				299272FD25348F0F00E41D63 /* AppConstants.swift in Sources */,
 				299272DF2534831300E41D63 /* SourceProtocol.swift in Sources */,
 				299272EC2534848800E41D63 /* SourceViewController.swift in Sources */,
+				2992737E25358D3200E41D63 /* CategoryModel.swift in Sources */,
 				299273712534D77400E41D63 /* WebviewInteractor.swift in Sources */,
 				299273302534A3E700E41D63 /* ArticleRouter.swift in Sources */,
 			);
