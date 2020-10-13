@@ -12,6 +12,9 @@ class ArticleViewController: UIViewController {
     var presenter: ViewToPresenterArticleProtocol?
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ArticleCollectionView: UICollectionView!
+    let searchController = UISearchController(searchResultsController: nil)
+    var searchQuery: String = ""
+    var timer: Timer?
     
     var source: Source?
     var articleArrayList: [Article] = []
@@ -21,7 +24,7 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingIndicator.startAnimating()
-        presenter?.startFetchingArticleBySource(source: source!, page: page)
+        presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
 
         // Do any additional setup after loading the view.
         setupNavigationBar()
@@ -29,7 +32,10 @@ class ArticleViewController: UIViewController {
     }
     
     func setupNavigationBar() {
+        searchController.searchBar.delegate = self
         navigationItem.title = "Article - \(source!.name)"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func setupCollectionView() {
@@ -41,16 +47,38 @@ class ArticleViewController: UIViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
+        print(offsetY, contentHeight, scrollView.frame.height)
+        print(offsetY > contentHeight - scrollView.frame.height)
         if offsetY > contentHeight - scrollView.frame.height {
             if(!fetchingMore) {
-                fetchingMore = true
-                page += 1
-                print("fetching page \(page)...")
-//                presenter?.startFetchingArticleBySource(source: source, page: page)
+                timer?.invalidate()
+                timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(fetchMoreArticle), userInfo: nil, repeats: false)
             }
         }
     }
+    
+    @objc func fetchMoreArticle() {
+        fetchingMore = true
+        page += 1
+        print("fetching page \(page)...")
+        presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
+    }
 
+}
+
+extension ArticleViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchQuery = searchText
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(callPresenterToSearch), userInfo: nil, repeats: false)
+    }
+    
+    @objc func callPresenterToSearch() {
+        print(searchQuery)
+        page = 1
+        articleArrayList = []
+        presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
+    }
 }
 
 extension ArticleViewController: UICollectionViewDelegate {

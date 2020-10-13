@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class ArticlePresenter: ViewToPresenterArticleProtocol {
+    
     func startNavigateToWebviewArticle(navigationController: UINavigationController, url: String) {
         router?.navigateToWebviewArticle(navigationController: navigationController, url: url)
     }
@@ -19,8 +20,8 @@ class ArticlePresenter: ViewToPresenterArticleProtocol {
     
     var router: PresenterToRouterArticleProtocol?
     
-    func startFetchingArticleBySource(source: Source, page: Int) {
-        interactor?.fetchArticleBySource(source: source, page: page)
+    func startFetchingArticleBySource(source: Source, query: String?, page: Int) {
+        interactor?.fetchArticleBySource(source: source, query: query, page: page)
     }
     
     

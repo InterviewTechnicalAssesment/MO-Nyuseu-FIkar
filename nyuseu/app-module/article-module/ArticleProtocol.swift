@@ -12,7 +12,7 @@ protocol ViewToPresenterArticleProtocol {
     var view: PresenterToViewArticleProtocol? {get set}
     var interactor: PresenterToInteractorArticleProtocol? {get set}
     var router: PresenterToRouterArticleProtocol? {get set}
-    func startFetchingArticleBySource(source: Source, page: Int)
+    func startFetchingArticleBySource(source: Source, query: String?, page: Int)
     func startNavigateToWebviewArticle(navigationController: UINavigationController, url: String)
 }
 
@@ -27,7 +27,7 @@ protocol PresenterToRouterArticleProtocol {
 
 protocol PresenterToInteractorArticleProtocol {
     var presenter: InteractorToPresenterArticleProtocol? {get set}
-    func fetchArticleBySource(source: Source, page: Int)
+    func fetchArticleBySource(source: Source, query: String?, page: Int)
 }
 
 protocol InteractorToPresenterArticleProtocol {
