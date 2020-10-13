@@ -17,11 +17,20 @@ class WebviewArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.startLoadArticlePage(url: url)
-        WebKitArticle.load(URLRequest(url: URL(string: url)!))
-
+        print(url)
+        print(UIApplication.shared.canOpenURL(URL(string: url)!))
+        if (UIApplication.shared.canOpenURL(URL(string: url)!)) {
+            WebKitArticle.load(URLRequest(url: URL(string: url)!))
+        }
+        else {
+            let alert = UIAlertController(title: .none, message: "URL not valid", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         // Do any additional setup after loading the view.
     }
-
+    
 }
 
 extension WebviewArticleViewController: PresenterToViewWebviewProtocol {
