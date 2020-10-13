@@ -10,27 +10,27 @@ import SDWebImage
 
 class ArticleViewController: UIViewController {
     var presenter: ViewToPresenterArticleProtocol?
+    
+    let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ArticleCollectionView: UICollectionView!
     @IBOutlet weak var noDataLabel: UILabel!
-    let searchController = UISearchController(searchResultsController: nil)
-    var searchQuery: String = ""
-    var timer: Timer?
     
     var source: Source?
+    var searchQuery: String = ""
     var articleArrayList: [Article] = []
     var page = 1
     var fetchingMore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        noDataLabel.isHidden = true
         loadingIndicator.startAnimating()
         presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
 
         // Do any additional setup after loading the view.
         setupNavigationBar()
         setupCollectionView()
-        noDataLabel.isHidden = true
     }
     
     func setupNavigationBar() {
@@ -45,6 +45,7 @@ class ArticleViewController: UIViewController {
         ArticleCollectionView.dataSource = self
     }
     
+    //MARK: - INFINITE SCROLL
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -67,6 +68,7 @@ class ArticleViewController: UIViewController {
 
 }
 
+//MARK: - ARTICLE SEARCH BAR
 extension ArticleViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchQuery = searchText
@@ -81,6 +83,7 @@ extension ArticleViewController: UISearchBarDelegate {
     }
 }
 
+//MARK: - ARTICLE COLLECTION VIEW
 extension ArticleViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let articleUrl = articleArrayList[indexPath.row].url {
@@ -115,16 +118,16 @@ extension ArticleViewController: UICollectionViewDataSource {
     
 }
 
+//MARK: - PRESENTER TO VIEW
 extension ArticleViewController: PresenterToViewArticleProtocol {
     func showArticles(articles: [Article]) {
         var articleIndexPath: IndexPath?
         
         if articles.count == 0 {
             fetchingMore = true
-            let alert = UIAlertController(title: .none, message: "All article fetched", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
-                self.navigationController?.popViewController(animated: true)
-            }))
+            page = 1
+            let alert = UIAlertController(title: .none, message: "All articles are fetched", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             articles.forEach { (article) in
@@ -133,9 +136,7 @@ extension ArticleViewController: PresenterToViewArticleProtocol {
                 ArticleCollectionView.insertItems(at: [articleIndexPath!])
             }
         }
-        
         loadingIndicator.stopAnimating()
-//        ArticleCollectionView.reloadData()
         
         if articleArrayList.count == 0 {
             noDataLabel.isHidden = false
@@ -150,14 +151,13 @@ extension ArticleViewController: PresenterToViewArticleProtocol {
     
     func failShowArticles() {
         let alert = UIAlertController(title: .none, message: "Error fetching articles", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
-        }))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
 }
 
+//MARK: - ARTICLE COLLECTION VIEW CELL
 class ArticleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var articleImage: UIImageView!
     @IBOutlet weak var articleTitle: UILabel!

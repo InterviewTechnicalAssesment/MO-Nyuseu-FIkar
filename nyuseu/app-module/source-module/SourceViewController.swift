@@ -9,8 +9,9 @@ import UIKit
 
 class SourceViewController: UIViewController {
     var presenter: ViewToPresenterSourceProtocol?
-    @IBOutlet weak var SourceTableView: UITableView!
+    
     let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var SourceTableView: UITableView!
     
     var category: String = ""
     var sourceArrayList: [Source] = []
@@ -43,6 +44,7 @@ class SourceViewController: UIViewController {
 
 }
 
+//MARK: - SOURCE SEARCH BAR
 extension SourceViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
@@ -56,22 +58,7 @@ extension SourceViewController: UISearchBarDelegate {
     }
 }
 
-extension SourceViewController: PresenterToViewSourceProtocol {
-    func failShowSources() {
-        let alert = UIAlertController(title: "Error happen", message: "Failed to fetch data from server", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func showSources(sources: [Source]) {
-        sourceArrayList = sources
-        filteredSourceArrayList = sources
-        SourceTableView.reloadData()
-    }
-}
-
+//MARK: - SOURCE TABLE VIEW
 extension SourceViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return filteredSourceArrayList.count
@@ -107,6 +94,23 @@ extension SourceViewController: UITableViewDataSource {
     }
 }
 
+extension SourceViewController: PresenterToViewSourceProtocol {
+    func failShowSources() {
+        let alert = UIAlertController(title: "Error happen", message: "Failed to fetch data from server", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showSources(sources: [Source]) {
+        sourceArrayList = sources
+        filteredSourceArrayList = sources
+        SourceTableView.reloadData()
+    }
+}
+
+//MARK: - SOURCE TABLE VIEW CELL
 class SourceTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceName: UILabel!
     @IBOutlet weak var sourceURL: UILabel!
@@ -116,3 +120,4 @@ class SourceTableViewCell: UITableViewCell {
     }
     
 }
+

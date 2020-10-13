@@ -15,7 +15,6 @@ class CategoryRouter: PresenterToRouterCategoryProtocol {
         navigationController.pushViewController(sourceModule, animated: true)
     }
     
-    
     static func createCategoryModule() -> CategoryViewController {
         let view = mainstoryboard.instantiateViewController(withIdentifier: "CategoryViewController") as! CategoryViewController
         var presenter: ViewToPresenterCategoryProtocol & InteractorToPresenterCategoryProtocol = CategoryPresenter()

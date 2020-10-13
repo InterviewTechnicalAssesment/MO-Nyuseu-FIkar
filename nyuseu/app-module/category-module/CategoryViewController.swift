@@ -42,6 +42,8 @@ class CategoryViewController: UIViewController {
 
 }
 
+//MARK: - CATEGORY COLLECTION VIEW
+
 extension CategoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryArrayList.count
@@ -64,10 +66,10 @@ extension CategoryViewController: UICollectionViewDelegate {
     }
 }
 
-extension CategoryViewController: PresenterToViewCategoryProtocol {
-    
-}
+//MARK: - PRESENTER TO VIEW PROTOCOL
+extension CategoryViewController: PresenterToViewCategoryProtocol {}
 
+//MARK: - CATEGORY COLLECTION VIEW CELL
 class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var categoryName: UILabel!

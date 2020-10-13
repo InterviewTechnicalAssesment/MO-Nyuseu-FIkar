@@ -13,7 +13,6 @@ class SourcePresenter: ViewToPresenterSourceProtocol {
         router?.navigateToArticle(navigationController: navigationController, source: source)
     }
     
-    
     var view: PresenterToViewSourceProtocol?
     
     var interactor: PresenterToInteractorSourceProtocol?
@@ -26,6 +25,7 @@ class SourcePresenter: ViewToPresenterSourceProtocol {
 
 }
 
+//MARK: - INTERACTOR TO PRESENTER
 extension SourcePresenter: InteractorToPresenterSourceProtocol {
     func fetchSourceByCategorySuccess(source: SourceResponse) {
         let sources: [Source] = source.sources

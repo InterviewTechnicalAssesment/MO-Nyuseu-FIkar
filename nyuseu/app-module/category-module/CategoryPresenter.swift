@@ -15,11 +15,7 @@ class CategoryPresenter: ViewToPresenterCategoryProtocol {
     func startNavigateToSource(navigationController: UINavigationController, category: String) {
         router?.navigateToSource(navigationController: navigationController, category: category)
     }
-    
-    
-    
 }
 
-extension CategoryPresenter: InteractorToPresenterCategoryProtocol {
-    
-}
+//MARK: - INTERACTOR TO PRESENTER
+extension CategoryPresenter: InteractorToPresenterCategoryProtocol {}
