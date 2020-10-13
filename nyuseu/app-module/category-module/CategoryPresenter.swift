@@ -21,9 +21,5 @@ class CategoryPresenter: ViewToPresenterCategoryProtocol {
 }
 
 extension CategoryPresenter: InteractorToPresenterCategoryProtocol {
-    func fetchCitiesByQueryFailed() {
-        print("error!")
-    }
-    
     
 }

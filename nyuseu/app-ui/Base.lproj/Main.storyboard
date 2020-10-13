@@ -35,10 +35,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="189" height="158"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qQl-7o-dTg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="189" height="158"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dej-6c-4lZ">
-                                                    <rect key="frame" x="16" y="118" width="52" height="24"/>
+                                                    <rect key="frame" x="16" y="210" width="52" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -57,10 +57,8 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <constraints>
-                                            <constraint firstAttribute="bottomMargin" secondItem="j6i-dl-jFw" secondAttribute="bottom" constant="-8" id="M3o-Z9-ghN"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="j6i-dl-jFw" secondAttribute="trailing" constant="-8" id="c1B-s6-R7s"/>
-                                            <constraint firstItem="j6i-dl-jFw" firstAttribute="leading" secondItem="gKK-jY-ntu" secondAttribute="leadingMargin" constant="-8" id="lz8-Lt-rq3"/>
-                                            <constraint firstItem="j6i-dl-jFw" firstAttribute="top" secondItem="gKK-jY-ntu" secondAttribute="topMargin" constant="-8" id="yVr-wl-PME"/>
+                                            <constraint firstItem="j6i-dl-jFw" firstAttribute="top" secondItem="gKK-jY-ntu" secondAttribute="topMargin" constant="-8" id="HO2-4p-VVb"/>
+                                            <constraint firstItem="j6i-dl-jFw" firstAttribute="leading" secondItem="gKK-jY-ntu" secondAttribute="leadingMargin" constant="-8" id="v3h-JT-CGS"/>
                                         </constraints>
                                         <size key="customSize" width="189" height="158"/>
                                         <connections>
@@ -180,8 +178,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="385"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N2I-gz-7vU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="265"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.icloud" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N2I-gz-7vU">
+                                                    <rect key="frame" x="0.0" y="1" width="376" height="261.5"/>
+                                                    <color key="tintColor" systemColor="systemGray2Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="376" id="8uF-3D-5fM"/>
                                                         <constraint firstAttribute="height" constant="265" id="i6e-HE-o2z"/>
@@ -225,21 +224,30 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NYQ-n1-WLB">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Dz-0q-mDw">
+                                <rect key="frame" x="150.5" y="437.5" width="113" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGray2Color"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="poU-cb-6l7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NYQ-n1-WLB" firstAttribute="centerY" secondItem="aou-Sa-8Sj" secondAttribute="centerY" id="2bi-q9-iKi"/>
                             <constraint firstItem="1Mr-Il-QdA" firstAttribute="top" secondItem="poU-cb-6l7" secondAttribute="top" constant="10" id="2dc-fe-KgS"/>
+                            <constraint firstItem="9Dz-0q-mDw" firstAttribute="centerY" secondItem="aou-Sa-8Sj" secondAttribute="centerY" id="DRO-dI-qc6"/>
                             <constraint firstItem="NYQ-n1-WLB" firstAttribute="centerX" secondItem="aou-Sa-8Sj" secondAttribute="centerX" id="fdv-mO-UzF"/>
                             <constraint firstItem="poU-cb-6l7" firstAttribute="bottom" secondItem="1Mr-Il-QdA" secondAttribute="bottom" id="gTd-p0-K1H"/>
                             <constraint firstItem="1Mr-Il-QdA" firstAttribute="leading" secondItem="poU-cb-6l7" secondAttribute="leading" id="gYR-zG-INM"/>
+                            <constraint firstItem="9Dz-0q-mDw" firstAttribute="centerX" secondItem="aou-Sa-8Sj" secondAttribute="centerX" id="kuK-3d-A9a"/>
                             <constraint firstItem="poU-cb-6l7" firstAttribute="trailing" secondItem="1Mr-Il-QdA" secondAttribute="trailing" id="vUZ-eG-d7h"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="ArticleCollectionView" destination="1Mr-Il-QdA" id="iAP-k3-9CF"/>
                         <outlet property="loadingIndicator" destination="NYQ-n1-WLB" id="jp2-WG-WDH"/>
+                        <outlet property="noDataLabel" destination="9Dz-0q-mDw" id="aJx-yR-TYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lm-JH-Abi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -282,6 +290,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="xmark.icloud" catalog="system" width="128" height="88"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -290,6 +299,9 @@
         </systemColor>
         <systemColor name="systemFillColor">
             <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemFillColor">
             <color red="0.46274509803921571" green="0.46274509803921571" blue="0.50196078431372548" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>

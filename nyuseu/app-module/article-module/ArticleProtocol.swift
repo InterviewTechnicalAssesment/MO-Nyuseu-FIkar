@@ -18,6 +18,7 @@ protocol ViewToPresenterArticleProtocol {
 
 protocol PresenterToViewArticleProtocol {
     func showArticles(articles: [Article])
+    func failShowArticles()
 }
 
 protocol PresenterToRouterArticleProtocol {

@@ -29,6 +29,6 @@ protocol PresenterToInteractorCategoryProtocol {
 }
 
 protocol InteractorToPresenterCategoryProtocol {
-    func fetchCitiesByQueryFailed()
+    
 }
 

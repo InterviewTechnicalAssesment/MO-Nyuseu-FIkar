@@ -12,6 +12,7 @@ class ArticleViewController: UIViewController {
     var presenter: ViewToPresenterArticleProtocol?
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ArticleCollectionView: UICollectionView!
+    @IBOutlet weak var noDataLabel: UILabel!
     let searchController = UISearchController(searchResultsController: nil)
     var searchQuery: String = ""
     var timer: Timer?
@@ -29,6 +30,7 @@ class ArticleViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupNavigationBar()
         setupCollectionView()
+        noDataLabel.isHidden = true
     }
     
     func setupNavigationBar() {
@@ -47,8 +49,6 @@ class ArticleViewController: UIViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        print(offsetY, contentHeight, scrollView.frame.height)
-        print(offsetY > contentHeight - scrollView.frame.height)
         if offsetY > contentHeight - scrollView.frame.height {
             if(!fetchingMore) {
                 timer?.invalidate()
@@ -61,6 +61,7 @@ class ArticleViewController: UIViewController {
         fetchingMore = true
         page += 1
         print("fetching page \(page)...")
+        loadingIndicator.startAnimating()
         presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
     }
 
@@ -74,7 +75,6 @@ extension ArticleViewController: UISearchBarDelegate {
     }
     
     @objc func callPresenterToSearch() {
-        print(searchQuery)
         page = 1
         articleArrayList = []
         presenter?.startFetchingArticleBySource(source: source!, query: searchQuery, page: page)
@@ -95,7 +95,6 @@ extension ArticleViewController: UICollectionViewDelegate {
 
 extension ArticleViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(articleArrayList.count)
         return articleArrayList.count
     }
     
@@ -105,7 +104,8 @@ extension ArticleViewController: UICollectionViewDataSource {
             cell.articleImage.sd_setImage(with: URL(string: imageArticle))
         }
         else {
-            cell.articleImage.isHidden = !cell.articleImage.isHidden
+            cell.articleImage.image = UIImage(systemName: "xmark.icloud")
+            cell.articleImage.tintColor = UIColor.systemGray2
         }
         cell.articleTitle.text = articleArrayList[indexPath.row].title
         cell.articleDescription.text = articleArrayList[indexPath.row].description
@@ -117,16 +117,45 @@ extension ArticleViewController: UICollectionViewDataSource {
 
 extension ArticleViewController: PresenterToViewArticleProtocol {
     func showArticles(articles: [Article]) {
-        articles.forEach { (article) in
-            articleArrayList.append(article)
+        var articleIndexPath: IndexPath?
+        
+        if articles.count == 0 {
+            fetchingMore = true
+            let alert = UIAlertController(title: .none, message: "All article fetched", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            articles.forEach { (article) in
+                articleIndexPath = IndexPath(item: articleArrayList.count, section: 0)
+                articleArrayList.append(article)
+                ArticleCollectionView.insertItems(at: [articleIndexPath!])
+            }
         }
-        print("fetched", articleArrayList)
-        ArticleCollectionView.reloadData()
+        
         loadingIndicator.stopAnimating()
+//        ArticleCollectionView.reloadData()
+        
+        if articleArrayList.count == 0 {
+            noDataLabel.isHidden = false
+        }
+        
+        
         guard page==1 else {
             return fetchingMore = false
         }
+        
     }
+    
+    func failShowArticles() {
+        let alert = UIAlertController(title: .none, message: "Error fetching articles", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 class ArticleCollectionViewCell: UICollectionViewCell {

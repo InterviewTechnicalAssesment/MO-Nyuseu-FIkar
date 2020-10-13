@@ -13,7 +13,6 @@ class SourceInteractor: PresenterToInteractorSourceProtocol {
     
     func fetchSourceByCategory(category: String) {
         AF.request("\(NEWS_API_URL)sources?apiKey=\(NEWS_API_KEY)&category=\(category)").responseDecodable(of: SourceResponse.self) { (response) in
-//            print(response)
             if let sourceResponse = response.value {
                 self.presenter?.fetchSourceByCategorySuccess(source: sourceResponse)
             } else {

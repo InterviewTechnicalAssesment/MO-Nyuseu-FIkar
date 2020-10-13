@@ -34,7 +34,7 @@ extension ArticlePresenter: InteractorToPresenterArticleProtocol {
     }
     
     func fetchArticleBySourceFailed() {
-        
+        view?.failShowArticles()
     }
     
     
