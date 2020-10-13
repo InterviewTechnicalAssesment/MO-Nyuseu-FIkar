@@ -35,6 +35,8 @@ class SourceViewController: UIViewController {
     func setupTableView() {
         SourceTableView.delegate = self
         SourceTableView.dataSource = self
+        SourceTableView.tableFooterView = UIView()
+        SourceTableView.separatorStyle = .none
     }
 
 }
@@ -45,7 +47,7 @@ extension SourceViewController: UISearchBarDelegate {
             filteredSourceArrayList = sourceArrayList
         } else {
             filteredSourceArrayList = sourceArrayList.filter {
-                $0.name.contains(searchText)
+                $0.name.lowercased().contains(searchText.lowercased())
             }
         }
         SourceTableView.reloadData()
@@ -69,21 +71,46 @@ extension SourceViewController: PresenterToViewSourceProtocol {
 }
 
 extension SourceViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.startNavigateToArticle(navigationController: navigationController!, source: filteredSourceArrayList[indexPath.row])
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return filteredSourceArrayList.count
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.startNavigateToArticle(navigationController: navigationController!, source: filteredSourceArrayList[indexPath.section])
+    }
+
 }
 
 extension SourceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredSourceArrayList.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SourceTableView.dequeueReusableCell(withIdentifier: "SourceCell", for: indexPath)
-        cell.textLabel?.text = filteredSourceArrayList[indexPath.row].name
+        let cell = SourceTableView.dequeueReusableCell(withIdentifier: "SourceCell", for: indexPath) as! SourceTableViewCell
+        cell.layer.cornerRadius = 20
+        cell.sourceName.text = filteredSourceArrayList[indexPath.section].name
+        cell.sourceURL.text = filteredSourceArrayList[indexPath.section].url
         return cell
     }
+}
+
+class SourceTableViewCell: UITableViewCell {
+    @IBOutlet weak var sourceName: UILabel!
+    @IBOutlet weak var sourceURL: UILabel!
     
+    override class func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
 }
